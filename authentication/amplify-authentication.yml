@@ -1,0 +1,65 @@
+generated: '2026-07-20'
+method: probed
+source: live HTTP probes of https://api.getamplifylife.com/ (2026-07-20)
+docs: null
+summary:
+  types:
+  - http
+  api_key_in: []
+  oauth2_flows: []
+  note: >-
+    Amplify publishes no authentication documentation. The profile below is derived
+    entirely from observed responses of the live, gated production API host. It is
+    an observation of behaviour, not a provider claim.
+schemes:
+- name: BearerIdToken
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  in: header
+  parameter: Authorization
+  sources:
+  - probe:https://api.getamplifylife.com/
+  description: >-
+    Sending "Authorization: Bearer <token>" changes the failure mode from the
+    generic gate to token validation, and the returned stack trace shows the token
+    being handed to google-auth-library's OAuth2Client.verifyIdTokenAsync /
+    verifySignedJwtWithCertsAsync inside a User.Auth handler. The API therefore
+    authenticates callers with Google-issued OpenID Connect ID tokens (Google
+    Sign-In), verified server-side against Google's public certificates.
+  evidence:
+  - request: 'GET / with header "Authorization: Bearer test"'
+    status: 401
+    body_error: 'Wrong number of segments in token: test'
+    stack_frames:
+    - _OAuth2Client.verifySignedJwtWithCertsAsync
+    - _OAuth2Client.verifyIdTokenAsync
+    - User.Auth
+gate:
+  description: >-
+    Requests carrying no Authorization header are rejected by an application-level
+    gate before any token validation runs. The gate is not satisfied by any of the
+    common API-key header names probed (x-api-key, apikey, authorizationkey,
+    authorization-key), which all produced the same unauthenticated response.
+  status: 401
+  body: '{"error":"authorization key is not provided"}'
+  headers_probed_without_effect:
+  - x-api-key
+  - apikey
+  - authorizationkey
+  - authorization-key
+infrastructure:
+  edge: Amazon CloudFront
+  gateway: AWS API Gateway (HTTP API, $default stage, /{proxy+} catch-all route)
+  region: us-west-1
+  runtime: Node.js Lambda built with SST (apps/legacy/src/sst.mjs)
+  evidence:
+  - apigw-requestid + x-amzn-trace-id response headers
+  - via/x-amz-cf-id CloudFront response headers
+  - echoed requestContext.domainName aruc25yw2d.execute-api.us-west-1.amazonaws.com
+access: private
+onboarding: >-
+  No public sign-up, key issuance or documentation surface was found. Access appears
+  to be granted only under a carrier or partner agreement; the Carrier Solutions page
+  describes the motion as "Embed your products inside trusted partner ecosystems via
+  API".
