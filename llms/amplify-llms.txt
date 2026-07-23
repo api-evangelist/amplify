@@ -1,0 +1,90 @@
+# Amplify (Amplify Life Insurance)
+
+> Amplify is an insurtech founded in 2019 (platform launched 2020) building distribution
+> infrastructure for life insurance. It offers term, permanent, indexed universal life
+> (IUL), annuity, final expense whole life and accidental death benefit products, with an
+> emphasis on cash-value policies customers can borrow against while alive. It distributes
+> direct-to-consumer, through advisors and referrals, embedded in partner products, and
+> white-label for carriers and reinsurers (FGL, EMC, Munich Re).
+
+Provenance: generated 2026-07-19 by the API Evangelist enrichment pipeline from
+getamplifylife.com public pages and live probes. Amplify does not publish its own
+/llms.txt (HTTP 404 as of 2026-07-19).
+
+## Developer status
+
+Amplify has no public developer program. There is no developer portal, no published
+OpenAPI or AsyncAPI, no public SDKs or packages on npm/PyPI, no CLI, no MCP server, no
+status page and no /.well-known/ discovery documents. Note that npm results for
+"amplify" are AWS Amplify and Axway Amplify — unrelated companies.
+
+A production API host exists at https://api.getamplifylife.com, fronted by Amazon
+CloudFront and AWS API Gateway (a single /{proxy+} catch-all on the $default stage,
+us-west-1, a Node.js Lambda built with SST). Every unauthenticated path returns HTTP 401
+with the body {"error":"authorization key is not provided"}. Access appears to be granted
+only under a carrier or partner agreement; the Carrier Solutions page describes the motion
+as "Embed your products inside trusted partner ecosystems via API".
+
+Probing on 2026-07-20 established the authentication model without any documentation:
+sending `Authorization: Bearer <token>` moves the request past the gate into token
+validation, and the returned stack trace shows the token being verified by
+google-auth-library's OAuth2Client.verifyIdTokenAsync inside a User.Auth handler. The API
+therefore accepts Google-issued OpenID Connect ID tokens. None of the common API-key
+header names (x-api-key, apikey, authorizationkey, authorization-key) satisfy the gate.
+Errors use a custom {"error": ...} envelope, not RFC 9457 problem+json. See
+authentication/, errors/, conventions/ and conformance/ in this repo.
+
+## Company
+
+- [Home](https://getamplifylife.com)
+- [About Us](https://getamplifylife.com/about-us)
+- [How Amplify Works](https://getamplifylife.com/how-amplify-works)
+- [Product Overview](https://getamplifylife.com/product-overview)
+- [Licenses](https://getamplifylife.com/licenses)
+
+## Partner and carrier surfaces
+
+- [Carrier Solutions](https://getamplifylife.com/carrier-solutions): white-label consumer
+  experiences, agent-assist workflows, and embedded product distribution via API.
+- [Partner Program](https://getamplifylife.com/partner-landing)
+- [Advisors](https://getamplifylife.com/advisors)
+- [Advisor Referrals](https://getamplifylife.com/advisor-referrals)
+
+## Embeddable components
+
+Amplify publishes embeddable IUL/VUL policy-illustration calculator widgets under /embed/,
+enumerated in its sitemap and excluded from crawling by robots.txt. See
+components/amplify-components.yml in this repo.
+
+- [Calculator](https://getamplifylife.com/calculator)
+- [IUL widget](https://getamplifylife.com/embed/AmplifyIULWidget)
+- [VUL widget](https://getamplifylife.com/embed/AmplifyVULWidget)
+
+## Learn
+
+- [Blog](https://getamplifylife.com/learn/blog)
+- [FAQ](https://getamplifylife.com/learn/faq)
+- [Glossary](https://getamplifylife.com/learn/glossary)
+- [Guide](https://getamplifylife.com/guide)
+
+## Customer surfaces
+
+- [Instant quotes](https://quotes.getamplifylife.com/): quote and application funnel.
+- [Policy portal (login)](https://portal.getamplifylife.com/): existing policyholder access.
+
+## Security posture
+
+No security.txt, no responsible-disclosure page, no bug bounty and no trust center were
+found (probed 2026-07-20). No SOC 2 / ISO 27001 / PCI / HIPAA / FedRAMP claim is
+published. DNS: SPF and DMARC present (DMARC policy p=none), no DNSSEC, no CAA. See
+security/amplify-domain-security.yml and conformance/amplify-conformance.yml.
+
+## Legal
+
+- [Terms and Conditions](https://getamplifylife.com/terms-and-conditions)
+- [Privacy Policy](https://getamplifylife.com/privacy-policy)
+
+## Optional
+
+- Investors include Anthemis and Crosslink Capital (co-led a $20M Series B, June 2024).
+- robots.txt fully disallows GPTBot.

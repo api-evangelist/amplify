@@ -1,0 +1,59 @@
+generated: '2026-07-20'
+method: searched
+source: live HTTP probes of the /.well-known/ surface on Amplify hosts
+summary: No /.well-known/ discovery documents are published on any Amplify host. The
+  marketing, customer-portal and quote hosts return 404 for every probed path; the
+  API host is fully gated and returns 401 for every path (including /.well-known/),
+  so nothing is discoverable without a partner credential.
+hosts:
+- host: https://www.getamplifylife.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+- host: https://api.getamplifylife.com
+  note: AWS API Gateway proxy; all paths gated behind an authorization key.
+  documents:
+  - path: /.well-known/security.txt
+    status: 401
+  - path: /.well-known/openid-configuration
+    status: 401
+  - path: /.well-known/oauth-authorization-server
+    status: 401
+  - path: /.well-known/api-catalog
+    status: 401
+  - path: /.well-known/ai-plugin.json
+    status: 401
+- host: https://portal.getamplifylife.com
+  note: Customer policy portal (login). Probed 2026-07-20.
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+- host: https://quotes.getamplifylife.com
+  note: Instant-quote / application funnel. Probed 2026-07-20.
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 404
+other_probes:
+- path: /robots.txt
+  host: https://portal.getamplifylife.com
+  status: 404
+- path: /llms.txt
+  host: https://www.getamplifylife.com
+  status: 404
+- path: /robots.txt
+  host: https://www.getamplifylife.com
+  status: 200
+  note: 'Allows all crawlers except GPTBot (fully disallowed); disallows /embed/*.'
+- path: /sitemap.xml
+  host: https://www.getamplifylife.com
+  status: 200

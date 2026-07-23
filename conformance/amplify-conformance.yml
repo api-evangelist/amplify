@@ -1,0 +1,58 @@
+generated: '2026-07-20'
+method: probed
+source: live HTTP probes of https://api.getamplifylife.com/ + getamplifylife.com public pages (2026-07-20)
+note: >-
+  Amplify makes no public conformance or compliance claims — there is no trust
+  center, no certifications page and no developer documentation. Every entry below
+  is either observed from the live host or recorded false for want of evidence.
+  Absence of evidence is recorded as non-conformance, not as a negative finding.
+standards:
+- id: oidc
+  conforms: true
+  evidence: >-
+    Bearer tokens are validated as Google-issued OpenID Connect ID tokens via
+    google-auth-library OAuth2Client.verifyIdTokenAsync (observed in the returned
+    stack trace). The API is an OIDC relying party; it is not an OIDC provider and
+    publishes no /.well-known/openid-configuration of its own.
+- id: oauth2
+  conforms: false
+  evidence: >-
+    No OAuth 2.0 authorization server, no /.well-known/oauth-authorization-server
+    (404 on the marketing host, 401 on the API host), no documented scopes or flows.
+    Authentication delegates to Google rather than exposing an OAuth2 surface.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    Errors use a custom {"error": "..."} envelope with content-type application/json;
+    no application/problem+json responses were observed.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 on the marketing and portal hosts.
+- id: rfc8615-well-known
+  conforms: false
+  evidence: >-
+    No /.well-known/ discovery documents are published on any Amplify host. See
+    well-known/amplify-well-known.yml.
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No Sunset or Deprecation headers observed; no deprecation policy published.
+- id: openapi
+  conforms: false
+  evidence: No OpenAPI or Swagger definition is published or discoverable.
+- id: asyncapi
+  conforms: false
+  evidence: No event, streaming or webhook surface is documented.
+compliance_program:
+  published: false
+  trust_center: null
+  certifications: []
+  note: >-
+    No SOC 2, ISO 27001, PCI DSS, HIPAA or FedRAMP claim was found on any Amplify
+    surface. probe-security-programs.py returned vdp=none trust=none on 2026-07-20.
+    No Compliance pointer is emitted in apis.yml.
+regulatory:
+  note: >-
+    Amplify is a licensed life insurance producer and publishes a state licensing
+    page, which is insurance regulatory disclosure rather than an information
+    security compliance program.
+  licenses: https://getamplifylife.com/licenses

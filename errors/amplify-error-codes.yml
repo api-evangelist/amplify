@@ -1,0 +1,56 @@
+generated: '2026-07-20'
+method: probed
+source: live HTTP probes of https://api.getamplifylife.com/ (2026-07-20)
+format: custom
+note: >-
+  Amplify publishes no error reference. The envelope and the entries below are the
+  errors actually returned by the live production API host during authentication
+  probing. This is an observed catalog, not a published one, and it necessarily
+  covers only the unauthenticated edge of the API — every other operation is behind
+  the gate.
+envelope:
+  content_type: application/json
+  fields:
+  - name: error
+    type: string
+    description: Human-readable error message. There is no machine-readable error code.
+  - name: req
+    type: object
+    optional: true
+    description: >-
+      Full echo of the AWS Lambda proxy integration event (headers, requestContext,
+      path parameters). Returned on the unauthenticated gate response.
+  - name: stack
+    type: string
+    optional: true
+    description: >-
+      Server-side JavaScript stack trace, including bundle file paths and line
+      numbers. Returned on token-validation failures.
+  rfc9457: false
+  problem_json: false
+errors:
+- status: 401
+  error: authorization key is not provided
+  meaning: No Authorization header was supplied, so the request never reached token validation.
+  action: Supply an Authorization header with a Bearer ID token issued under a partner agreement.
+  observed_on: 'GET /'
+- status: 401
+  error: 'Wrong number of segments in token: <token>'
+  meaning: >-
+    The supplied bearer token is not a well-formed JWT (a Google OIDC ID token is
+    expected). Raised by google-auth-library during verifyIdTokenAsync.
+  action: Present a valid, unexpired Google-issued OpenID Connect ID token.
+  observed_on: 'GET / with Authorization: Bearer test'
+observations:
+- id: verbose-error-responses
+  description: >-
+    Error responses are unusually verbose for a production surface: the gate reply
+    echoes the entire API Gateway proxy event (including the upstream
+    execute-api.us-west-1.amazonaws.com hostname, API id, account id and the
+    caller's own resolved geo/IP headers), and token failures return a raw server
+    stack trace with bundle paths. Recorded here as an accuracy note about the
+    observed contract, not as a vulnerability report.
+  severity: informational
+related:
+- conventions/amplify-conventions.yml
+- authentication/amplify-authentication.yml

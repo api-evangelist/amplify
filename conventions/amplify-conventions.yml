@@ -1,0 +1,59 @@
+generated: '2026-07-20'
+method: probed
+source: live HTTP probes of https://api.getamplifylife.com/ (2026-07-20)
+docs: null
+summary: >-
+  Amplify documents no API conventions publicly. Everything below is either observed
+  from the live gated host or explicitly recorded as unknown. Unknown is the honest
+  and expected result for a private partner API with no developer surface — these
+  fields are placeholders for a future round, not assertions.
+authentication:
+  style: bearer-jwt
+  header: Authorization
+  token: Google-issued OpenID Connect ID token, verified server-side
+  detail: authentication/amplify-authentication.yml
+idempotency:
+  supported: unknown
+  header: null
+  note: >-
+    No idempotency key header or contract is documented, and none can be observed
+    from behind the authentication gate. No Idempotency pointer is emitted in
+    apis.yml because idempotency support has not been established.
+pagination:
+  style: unknown
+  params: []
+  response_fields: []
+field_expansion:
+  supported: unknown
+metadata:
+  supported: unknown
+request_tracing:
+  request_id_header: apigw-requestid
+  trace_header: x-amzn-trace-id
+  note: >-
+    Both are AWS API Gateway / X-Ray platform headers surfaced by the infrastructure,
+    not an Amplify-defined correlation contract.
+versioning:
+  scheme: unknown
+  current: null
+  note: >-
+    The API Gateway route is a single /{proxy+} catch-all on the $default stage; no
+    version segment appears in the host or observed paths.
+error_envelope:
+  format: custom
+  rfc9457: false
+  shape: '{"error": "<message>", "req": {...}, "stack": "<trace>"}'
+  detail: errors/amplify-error-codes.yml
+rate_limiting:
+  documented: false
+  headers_observed: []
+transport:
+  http_version: HTTP/2
+  tls: TLSv1.3
+  edge: Amazon CloudFront
+  gateway: AWS API Gateway
+related:
+- authentication/amplify-authentication.yml
+- errors/amplify-error-codes.yml
+- conformance/amplify-conformance.yml
+- security/amplify-domain-security.yml

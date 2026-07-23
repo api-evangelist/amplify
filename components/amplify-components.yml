@@ -1,0 +1,56 @@
+generated: '2026-07-19'
+method: searched
+source: https://getamplifylife.com/sitemap-0.xml + live probes of /embed/* paths
+summary: Amplify publishes embeddable, iframe-oriented life-insurance calculator widgets
+  under /embed/. They are enumerated in the public sitemap and each returns HTTP 200
+  text/html, but they are excluded from crawling by robots.txt (Disallow /embed/*),
+  which is consistent with surfaces intended for partner/advisor embedding rather
+  than direct navigation. No documented loader script, npm package, configuration
+  API or integration guide was found — this is an observed embed surface, not a
+  published component library.
+documented: false
+loader_libraries: []
+families:
+- name: Policy illustration widgets
+  description: Interactive cash-value / policy illustration calculators embedded into
+    partner and advisor pages.
+  components:
+  - name: AmplifyIULWidget
+    url: https://getamplifylife.com/embed/AmplifyIULWidget
+    status: 200
+    product: Indexed Universal Life (IUL)
+  - name: AmplifyVULWidget
+    url: https://getamplifylife.com/embed/AmplifyVULWidget
+    status: 200
+    product: Variable Universal Life (VUL)
+  - name: VULWidget
+    url: https://getamplifylife.com/embed/AmplifyVULWidget/VULWidget
+    product: Variable Universal Life (VUL)
+  - name: vulWidget
+    url: https://getamplifylife.com/embed/vulWidget
+    product: Variable Universal Life (VUL)
+  - name: amplifyWidget54363
+    url: https://getamplifylife.com/embed/amplifyWidget54363
+  - name: widget54363
+    url: https://getamplifylife.com/embed/widget54363
+- name: Widget sub-components
+  description: Internal building blocks of the calculator widgets, exposed as individual
+    routes in the sitemap.
+  components:
+  - name: Controllers
+    url: https://getamplifylife.com/embed/components/Controllers/Controllers
+  - name: CustomInput
+    url: https://getamplifylife.com/embed/components/Controllers/customInput/CustomInput
+  - name: Switcher
+    url: https://getamplifylife.com/embed/components/Controllers/switcher/Switcher
+  - name: Results
+    url: https://getamplifylife.com/embed/components/Results/results
+  - name: Select
+    url: https://getamplifylife.com/embed/components/Select/Select
+  - name: Slider
+    url: https://getamplifylife.com/embed/components/Slider/Slider
+  - name: VulChart
+    url: https://getamplifylife.com/embed/components/VulChart/VulChart
+related:
+- https://getamplifylife.com/calculator
+- https://getamplifylife.com/carrier-solutions
