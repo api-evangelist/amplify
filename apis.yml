@@ -13,6 +13,17 @@ description: 'Amplify (Amplify Life Insurance) is an insurtech founded in 2019 a
   fronted by AWS API Gateway that rejects unauthenticated calls, and it publishes
   embeddable IUL/VUL calculator widgets under /embed/ used for partner and advisor
   placements.'
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
