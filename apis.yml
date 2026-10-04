@@ -53,7 +53,7 @@ tags:
 - Insurance
 - Insurtech
 - Life Insurance
-- Financial-Services
+- Financial Services
 - Fintech
 - Embedded Finance
 - Annuities
@@ -66,6 +66,7 @@ tags_raw:
 - Fintech
 - Embedded Finance
 - Annuities
+- Financial-Services
 apis:
 - aid: amplify:distribution
   name: Amplify Distribution API
