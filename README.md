@@ -64,6 +64,88 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Amplify is a company surfaced as a portfolio company of anthemis and added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+Amplify (Amplify Life Insurance) is an insurtech founded in 2019 and launched in 2020, building what it calls the modern infrastructure for life insurance. It sells term, permanent, indexed universal life (IUL), annuity, final expense whole life and accidental death benefit products, with an emphasis on cash-value policies customers can borrow against while alive. Amplify distributes through four motions on one platform: a direct-to-consumer digital experience, an advisor and referral network, embedded distribution inside partner products, and white-label carrier partnerships with carriers and reinsurers including FGL, EMC and Munich Re. Its public developer surface is minimal: there is no developer portal, no published OpenAPI and no public SDKs. The company does operate a production API host (api.getamplifylife.com) fronted by AWS API Gateway that rejects unauthenticated calls, and it publishes embeddable IUL/VUL calculator widgets under /embed/ used for partner and advisor placements.
 
-Backed by: anthemis
+**Areas:** Company · Insurance · Insurtech · Life Insurance · Financial Services · Fintech · Embedded Finance · Annuities
+
+## Amplify on APIs.io
+
+Everything profiled for Amplify is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/amplify/](https://apis.io/providers/amplify/)** — or go straight to one of the APIs or properties below.
+
+### APIs (1)
+
+- [Amplify Distribution API](https://apis.io/apis/amplify/distribution/) — Private partner-facing API behind api.getamplifylife.com, used for Amplify's embedded distribution motion ("Embed your products inside trusted partner…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Amplify Authentication](https://apis.io/security/amplify/amplify-authentication/)
+- [Amplify Domain Security](https://apis.io/security/amplify/amplify-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://getamplifylife.com)
+- [Pricing](https://quotes.getamplifylife.com/)
+- [Blog](https://getamplifylife.com/learn/blog)
+- [Terms of service](https://getamplifylife.com/terms-and-conditions)
+- [Privacy policy](https://getamplifylife.com/privacy-policy)
+
+## API Evangelist rating
+
+**Kin Score 21.7** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 19.0 |
+| Access clarity | 38.2 |
+
+**Agent readiness 5.4** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 21.9** — Insurance
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/amplify/](https://apis.io/providers/amplify/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Amplify: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/amplify/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
